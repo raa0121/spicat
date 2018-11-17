@@ -20,11 +20,12 @@ class KokoroIoNotifier {
     }
 
     private val bot = BotApi()
-    fun postMassage(text: String) {
-        postMassage(channel, text)
+
+    fun postMessage(text: String) {
+        postMessage(channel, text)
     }
 
-    private fun postMassage(channel_id: String, message: String) = runBlocking<Unit> {
+    private fun postMessage(channel_id: String, message: String) = runBlocking<Unit> {
         launch(Dispatchers.Default){
             bot.postV1BotChannelsChannelIdMessages(channel_id, message, "spicat", false, false)
         }

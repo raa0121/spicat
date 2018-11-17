@@ -39,7 +39,8 @@ fun Application.module() {
         }
         post("/") {
             val post = call.receive<MessageEntity>()
-
+            val spicat = Spicat()
+            spicat.server.broadcastMessage("[kokori-io/%s] %s: %s".format(post.channel?.channel_name, post.profile?.screen_name, post.raw_content))
             call.respond(mapOf("OK" to true))
         }
     }
