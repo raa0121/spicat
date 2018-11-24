@@ -2,7 +2,7 @@ package com.github.raa0121.spicat.system
 
 val envVars = Variables(SystemEnvKeyVals())
 
-val seacret = StrVar("KOKOROIO_SEACRET")
+val secret = StrVar("KOKOROIO_SECRET")
 val channel_id = StrVar("KOKOROIO_CHANNEL_ID")
 
 private class SystemEnvKeyVals : KeyVals {

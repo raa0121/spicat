@@ -16,7 +16,18 @@ import com.github.raa0121.kokoroio.model.*
 
 class Spicat : JavaPlugin() {
 
-    private val webserver = embeddedServer(Netty, 8080, module = Application::module)
+    private val webserver = embeddedServer(Netty, 8080) {
+        routing {
+            get("/") {
+                call.respondText("hi", ContentType.Text.Plain)
+            }
+            post("/") {
+                val post = call.receive<MessageEntity>()
+                server.broadcastMessage("[kokori-io/%s] %s: %s".format(post.channel?.channel_name, post.profile?.screen_name, post.raw_content))
+                call.respond(mapOf("OK" to true))
+            }
+        }
+    }
     override fun onEnable() {
         // Plugin startup logic
         webserver.start(wait = false)
@@ -28,20 +39,4 @@ class Spicat : JavaPlugin() {
         webserver.stop(gracePeriod = 100, timeout = 100, timeUnit = TimeUnit.SECONDS)
     }
 
-}
-
-fun Application.module() {
-    install(DefaultHeaders)
-    install(CallLogging)
-    install(Routing) {
-        get("/") {
-            call.respondText("hi", ContentType.Text.Plain)
-        }
-        post("/") {
-            val post = call.receive<MessageEntity>()
-            val spicat = Spicat()
-            spicat.server.broadcastMessage("[kokori-io/%s] %s: %s".format(post.channel?.channel_name, post.profile?.screen_name, post.raw_content))
-            call.respond(mapOf("OK" to true))
-        }
-    }
 }
