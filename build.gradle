@@ -42,12 +42,11 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile "org.spigotmc:spigot-api:$spigot_version"
+    
     embed "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     embed "com.github.raa0121:kokoro-io-kotlin:$kokoroio_version"
     embed "io.ktor:ktor-server-netty:$ktor_version"
     embed "io.ktor:ktor-jackson:$ktor_version"
-    embed "com.github.kittinunf.fuel:fuel:$fuel_version"
-    embed "com.github.kittinunf.fuel:fuel-gson:$fuel_version"
     embed "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
 }
 
@@ -64,7 +63,7 @@ buildscript {
     ext.ktor_version = '1.0.0-beta-3'
     ext.spigot_version = '1.13.2-R0.1-SNAPSHOT'
     ext.fuel_version = '1.16.0'
-    ext.kokoroio_version = '589fce2'
+    ext.kokoroio_version = 'e725dda'
 
     repositories {
         mavenCentral()

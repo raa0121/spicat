@@ -23,7 +23,13 @@ class Spicat : JavaPlugin() {
             }
             post("/") {
                 val post = call.receive<MessageEntity>()
-                server.broadcastMessage("[kokori-io/%s] %s: %s".format(post.channel?.channel_name, post.profile?.screen_name, post.raw_content))
+                server.broadcastMessage(
+                        "[kokoro-io/%s] %s: %s".format(
+                                post.channel?.channel_name,
+                                post.profile?.screen_name,
+                                post.raw_content
+                        )
+                )
                 call.respond(mapOf("OK" to true))
             }
         }

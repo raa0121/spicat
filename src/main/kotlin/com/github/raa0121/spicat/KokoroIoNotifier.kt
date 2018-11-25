@@ -26,6 +26,6 @@ class KokoroIoNotifier {
     }
 
     private fun postMessage(channel_id: String, message: String) = GlobalScope.launch(Dispatchers.Unconfined) {
-            bot.postV1BotChannelsChannelIdMessages(channel_id, message, "spicat", false, false)
+            bot.postV1BotChannelsChannelIdMessages(secret_key, channel_id, message, "spicat", false, false)
     }
 }
