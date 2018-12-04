@@ -1,18 +1,18 @@
 package com.github.raa0121.spicat
 
-import org.bukkit.plugin.java.JavaPlugin
-
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.http.*
+import com.github.raa0121.kokoroio.model.MessageEntity
+import io.ktor.application.call
+import io.ktor.http.ContentType
 import io.ktor.request.receive
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
+import io.ktor.response.respond
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.routing
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
+import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.TimeUnit
-
-import com.github.raa0121.kokoroio.model.*
 
 class Spicat : JavaPlugin() {
 
