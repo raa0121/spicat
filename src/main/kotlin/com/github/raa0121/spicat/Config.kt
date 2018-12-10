@@ -8,6 +8,7 @@ object Config {
     }
 
     lateinit var kokoroioBotAccessToken: String
+    lateinit var kokoroioBotCallbackSecret: String
     lateinit var kokoroioChannelId: String
 
     fun reload() {
@@ -21,6 +22,7 @@ object Config {
         val config = SpicatInstance.config
 
         kokoroioBotAccessToken = config.getString("kokoroio-bot-access-token", "")
+        kokoroioBotCallbackSecret = config.getString("kokoroio-bot-callback-secret", "")
         kokoroioChannelId = config.getString("kokoroio-channel-id", "")
     }
 
