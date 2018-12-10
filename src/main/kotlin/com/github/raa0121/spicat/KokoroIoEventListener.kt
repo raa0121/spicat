@@ -36,7 +36,7 @@ class KokoroIoEventListener : Listener {
 
     @EventHandler
     fun onAsyncPlayerChatEvent(event: AsyncPlayerChatEvent) {
-        notifier?.postMessage(String.format(event.format, event.player.displayName, event.message))
+        notifier?.postMessage(event.format.format(event.player.displayName, event.message))
     }
 
     @EventHandler
