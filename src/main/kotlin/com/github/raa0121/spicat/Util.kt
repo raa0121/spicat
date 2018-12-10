@@ -6,6 +6,7 @@ import org.bukkit.OfflinePlayer
 import org.bukkit.entity.Player
 import java.io.*
 import java.lang.reflect.InvocationTargetException
+import java.util.*
 import java.util.jar.JarFile
 import java.util.logging.Logger
 
@@ -73,6 +74,9 @@ val onlinePlayersCount: Int
 
 @Suppress("unused")
 inline fun <reified T> T.logger(): Logger = Logger.getLogger(T::class.java.simpleName)
+
+fun <E> List<E>.random(): E? = if (size > 0) get(Random().nextInt(size)) else null
+fun <E> List<E>.random(defVal: E): E = if (size > 0) get(Random().nextInt(size)) else defVal
 
 /**
  * jarファイルの中に格納されているファイルを、jarファイルの外にコピーするメソッド

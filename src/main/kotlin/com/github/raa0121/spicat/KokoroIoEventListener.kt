@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.AsyncPlayerChatEvent
+import org.bukkit.event.player.PlayerBedLeaveEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.server.ServerCommandEvent
@@ -45,4 +46,29 @@ class KokoroIoEventListener : Listener {
             notifier?.postMessage("天の声：" + event.command.replace("say ", ""))
         }
     }
+
+    @EventHandler
+    fun onPlayerBedLeaveEvent(event: PlayerBedLeaveEvent) {
+        if (event.player.world.time == 0L) notifier?.postMessage(listOf(
+                "# あさ",
+                "## あさ",
+                "### あさ",
+                "#### あさ",
+                "##### あさ",
+                "###### あさ",
+                "# ａｓａ",
+                "## ａｓａ",
+                "### ａｓａ",
+                "#### ａｓａ",
+                "##### ａｓａ",
+                "###### ａｓａ",
+                "# ＡＳＡ",
+                "## ＡＳＡ",
+                "### ＡＳＡ",
+                "#### ＡＳＡ",
+                "##### ＡＳＡ",
+                "###### ＡＳＡ"
+        ).random("# あさ"))
+    }
+
 }
