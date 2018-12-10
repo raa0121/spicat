@@ -43,6 +43,7 @@ dependencies {
     embed "io.ktor:ktor-server-netty:$ktor_version"
     embed "io.ktor:ktor-jackson:$ktor_version"
     embed "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
+    embed 'org.jetbrains.kotlinx:kotlinx-coroutines-io-jvm:0.1.1'
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
