@@ -12,6 +12,7 @@ import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import org.bukkit.plugin.java.JavaPlugin
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 class Spicat : JavaPlugin() {
@@ -34,6 +35,7 @@ class Spicat : JavaPlugin() {
             }
         }
     }
+
     override fun onEnable() {
         // Plugin startup logic
         webserver.start(wait = false)
@@ -45,4 +47,6 @@ class Spicat : JavaPlugin() {
         webserver.stop(gracePeriod = 100, timeout = 100, timeUnit = TimeUnit.SECONDS)
     }
 
+    val jarFile: File
+        get() = this.file
 }
