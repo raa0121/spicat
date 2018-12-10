@@ -9,31 +9,39 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.server.ServerCommandEvent
 
 class KokoroIoEventListener : Listener {
-    private val notifier: KokoroIoNotifier = KokoroIoNotifier()
+    private val logger = logger()
+
+    private val notifier: KokoroIoNotifier? =
+            if (Config.kokoroioBotAccessToken.isNotBlank() && Config.kokoroioChannelId.isNotBlank()) {
+                KokoroIoNotifier(Config.kokoroioBotAccessToken, Config.kokoroioChannelId)
+            } else {
+                logger.info("Token and channel id in Spicat/config.yml is empty, kokoro.io notification is disabled.")
+                null
+            }
 
     @EventHandler
     fun onPlayerJoinEvent(event: PlayerJoinEvent) {
-        notifier.postMessage(event.joinMessage)
+        notifier?.postMessage(event.joinMessage)
     }
     @EventHandler
     fun onPlayerQuitEvent(event: PlayerQuitEvent) {
-        notifier.postMessage(event.quitMessage)
+        notifier?.postMessage(event.quitMessage)
     }
 
     @EventHandler
     fun onPlayerDeathEvent(event: PlayerDeathEvent) {
-        notifier.postMessage(event.deathMessage)
+        notifier?.postMessage(event.deathMessage)
     }
 
     @EventHandler
     fun onAsyncPlayerChatEvent(event: AsyncPlayerChatEvent) {
-        notifier.postMessage(String.format(event.format, event.player.displayName, event.message))
+        notifier?.postMessage(String.format(event.format, event.player.displayName, event.message))
     }
 
     @EventHandler
     fun onServerCommandEvent(event: ServerCommandEvent) {
         if (event.command.indexOf("say") >= 0) {
-            notifier.postMessage("天の声：" + event.command.replace("say ", ""))
+            notifier?.postMessage("天の声：" + event.command.replace("say ", ""))
         }
     }
 }
