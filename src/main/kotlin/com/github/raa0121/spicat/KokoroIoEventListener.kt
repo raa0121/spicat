@@ -21,11 +21,12 @@ class KokoroIoEventListener : Listener {
 
     @EventHandler
     fun onPlayerJoinEvent(event: PlayerJoinEvent) {
-        notifier?.postMessage(event.joinMessage)
+        notifier?.postMessage(stripColor(event.joinMessage)!!)
     }
+
     @EventHandler
     fun onPlayerQuitEvent(event: PlayerQuitEvent) {
-        notifier?.postMessage(event.quitMessage)
+        notifier?.postMessage(stripColor(event.quitMessage)!!)
     }
 
     @EventHandler
