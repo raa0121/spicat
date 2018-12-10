@@ -58,7 +58,7 @@ buildscript {
     ext.ktor_version = '1.0.0-beta-3'
     ext.spigot_version = '1.13.2-R0.1-SNAPSHOT'
     ext.fuel_version = '1.16.0'
-    ext.kokoroio_version = 'e725dda'
+    ext.kokoroio_version = '97b8f19'
 
     repositories {
         mavenCentral()
