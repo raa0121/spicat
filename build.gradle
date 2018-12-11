@@ -41,9 +41,10 @@ dependencies {
     embed "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     embed "com.github.raa0121:kokoro-io-kotlin:$kokoroio_version"
     embed "io.ktor:ktor-server-netty:$ktor_version"
-    embed "io.ktor:ktor-jackson:$ktor_version"
+    embed "io.ktor:ktor-utils-jvm:$ktor_version"
     embed "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
     embed 'org.jetbrains.kotlinx:kotlinx-coroutines-io-jvm:0.1.1'
+    embed 'com.ryanharter.ktor:ktor-moshi:1.0.1'
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -56,7 +57,7 @@ processResources {
 
 buildscript {
     ext.kotlin_version = '1.3.10'
-    ext.ktor_version = '1.0.0-beta-3'
+    ext.ktor_version = '1.0.1'
     ext.spigot_version = '1.13.2-R0.1-SNAPSHOT'
     ext.fuel_version = '1.16.0'
     ext.kokoroio_version = '97b8f19'
