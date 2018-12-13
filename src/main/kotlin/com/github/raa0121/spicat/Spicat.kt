@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit
 
 class Spicat : JavaPlugin() {
 
+    lateinit var notifier: KokoroIoNotifier
+
     private val webserver = embeddedServer(Netty, 8080) {
         install(ContentNegotiation) {
             moshi(Serializer.moshi)
@@ -32,14 +34,17 @@ class Spicat : JavaPlugin() {
             post("/") {
                 try {
                     val post = call.receive<MessageEntity>()
-                    logger.info(post.channel?.channel_name)
-                    server.broadcastMessage(
-                             "[kokoro-io/%s] %s: %s".format(
-                                     post.channel?.channel_name,
-                                     post.profile?.screen_name,
-                                     post.raw_content
-                             )
-                    )
+                    if (post.channel?.channel_name == "spicat") {
+                        if (post.raw_content == "/list") {
+                            notifier.postMessage(server.onlinePlayers.joinToString(separator = ", ") { player -> player.displayName })
+                        } else server.broadcastMessage(
+                                "[kokoro-io/%s] %s: %s".format(
+                                        post.channel?.channel_name,
+                                        post.profile?.screen_name,
+                                        post.raw_content
+                                )
+                        )
+                    }
                 } catch (e: Exception) {
                     logger.warning(e.toString())
                 }
@@ -49,14 +54,15 @@ class Spicat : JavaPlugin() {
 
     override fun onEnable() {
         // Plugin startup logic
-        //notifier?.postMessage("Server starting.")
+        notifier = KokoroIoNotifier(Config.kokoroioBotAccessToken, Config.kokoroioChannelId)
+        notifier.postMessage("Server starting.")
         webserver.start(wait = false)
         server.pluginManager.registerEvents(KokoroIoEventListener(), this)
     }
 
     override fun onDisable() {
         // Plugin shutdown logic
-        //notifier?.postMessage("Server stopping.")
+        notifier.postMessage("Server stopping.")
         webserver.stop(gracePeriod = 10, timeout = 10, timeUnit = TimeUnit.SECONDS)
     }
 
