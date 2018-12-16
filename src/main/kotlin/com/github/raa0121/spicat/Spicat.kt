@@ -1,6 +1,7 @@
 package com.github.raa0121.spicat
 
 import com.github.raa0121.kokoroio.model.MessageEntity
+import com.github.raa0121.spicat.modules.BearFallDamage
 import com.ryanharter.ktor.moshi.moshi
 import io.ktor.application.call
 import io.ktor.application.install
@@ -57,6 +58,7 @@ class Spicat : JavaPlugin() {
         notifier.postMessage("Server starting.")
         webserver.start(wait = false)
         server.pluginManager.registerEvents(KokoroIoEventListener(), this)
+        server.pluginManager.registerEvents(BearFallDamage(), this)
     }
 
     override fun onDisable() {

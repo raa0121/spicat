@@ -2,6 +2,8 @@ package com.github.raa0121.spicat
 
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Location
+import org.bukkit.Sound
 import java.io.*
 import java.util.*
 import java.util.jar.JarFile
@@ -61,4 +63,8 @@ fun copyFileFromJar(
     } catch (e: IOException) {
         e.printStackTrace()
     }
+}
+
+fun Location.playSound(sound: Sound, volume: Float = 1.0f, pitch: Float = 0.0f) {
+    world.playSound(this, sound, volume, pitch)
 }
