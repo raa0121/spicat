@@ -16,14 +16,20 @@ class BearFallDamage : Listener {
 
     @EventHandler
     fun onPlayerToggleSneakEvent(event: PlayerToggleSneakEvent) {
-        playerTimeList[event.player] = event.player.world.fullTime
+        val currentTime = event.player.world.fullTime
+
+        playerTimeList[event.player]?.let {
+            if (currentTime - it < 20) return
+        }
+        playerTimeList[event.player] = currentTime
     }
 
     @EventHandler
     fun onEntityDamageEvent(event: EntityDamageEvent) {
-        if (event.cause != EntityDamageEvent.DamageCause.FALL) return
+        if (event.entity !is Player || event.cause != EntityDamageEvent.DamageCause.FALL) return
 
-        playerTimeList[event.entity]?.let { sneakedTime ->
+        val player = event.entity as Player
+        playerTimeList[player]?.let { sneakedTime ->
             val timeDiff = event.entity.world.fullTime - sneakedTime
             if (timeDiff > 3) return
 
@@ -35,6 +41,8 @@ class BearFallDamage : Listener {
 
             event.entity.location.playSound(Sound.ENTITY_CAT_AMBIENT, pitch = 1.2f)
         }
+
+        playerTimeList[player] = 0
     }
 
 }
