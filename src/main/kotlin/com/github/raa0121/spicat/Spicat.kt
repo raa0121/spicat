@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 
 class Spicat : JavaPlugin() {
 
-    lateinit var notifier: KokoroIoNotifier
+    val notifier by lazy { KokoroIoNotifier(Config.kokoroioBotAccessToken, Config.kokoroioChannelId) }
 
     private val webserver = embeddedServer(Netty, 8080) {
         install(ContentNegotiation) {
@@ -54,7 +54,6 @@ class Spicat : JavaPlugin() {
 
     override fun onEnable() {
         // Plugin startup logic
-        notifier = KokoroIoNotifier(Config.kokoroioBotAccessToken, Config.kokoroioChannelId)
         notifier.postMessage("Server starting.")
         webserver.start(wait = false)
         server.pluginManager.registerEvents(KokoroIoEventListener(), this)
