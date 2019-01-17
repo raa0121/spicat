@@ -6,11 +6,11 @@ import org.bukkit.inventory.Recipe
 import org.bukkit.inventory.ShapedRecipe
 
 class MyRecipe {
-    fun NetherWartsBlock2NetherWarts() : Recipe {
-        return ShapedRecipe(ItemStack(Material.NETHER_WART, 9)).shape(
+    fun QuartzBlock2Quartz() : Recipe {
+        return ShapedRecipe(ItemStack(Material.QUARTZ, 4)).shape(
                 "___",
                 "_#_",
                 "___"
-        ).setIngredient('#', Material.NETHER_WART_BLOCK).setIngredient('_', Material.AIR)
+        ).setIngredient('#', Material.QUARTZ_BLOCK).setIngredient('_', Material.AIR)
     }
 }

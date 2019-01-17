@@ -59,7 +59,7 @@ class Spicat : JavaPlugin() {
         // Plugin startup logic
         notifier.postMessage("Server starting.")
         webserver.start(wait = false)
-        server.addRecipe(MyRecipe().NetherWartsBlock2NetherWarts())
+        server.addRecipe(MyRecipe().QuartzBlock2Quartz())
         server.pluginManager.registerEvents(KokoroIoEventListener(), this)
         server.pluginManager.registerEvents(BearFallDamage(), this)
     }
