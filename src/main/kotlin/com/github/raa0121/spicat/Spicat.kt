@@ -37,7 +37,9 @@ class Spicat : JavaPlugin() {
                     val post = call.receive<MessageEntity>()
                     if (post.channel?.channel_name == "spicat") {
                         if (post.raw_content == "/list") {
-                            notifier.postMessage(server.onlinePlayers.joinToString(separator = ", ") { player -> player.displayName })
+                            if(server.onlinePlayers.count() == 0) {
+                                notifier.postMessage("誰もいないよ 早くおいで")
+                            } else notifier.postMessage(server.onlinePlayers.joinToString(separator = ", ") { player -> player.displayName })
                         } else server.broadcastMessage(
                                 "[kokoro-io/%s] %s: %s".format(
                                         post.channel?.channel_name,
@@ -57,6 +59,7 @@ class Spicat : JavaPlugin() {
         // Plugin startup logic
         notifier.postMessage("Server starting.")
         webserver.start(wait = false)
+        server.addRecipe(MyRecipe().NetherWartsBlock2NetherWarts())
         server.pluginManager.registerEvents(KokoroIoEventListener(), this)
         server.pluginManager.registerEvents(BearFallDamage(), this)
     }
